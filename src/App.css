@@ -51,11 +51,13 @@
   flex-direction: column;
   justify-content: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .content p,
 .content h1 {
   color: white;
+  flex-shrink: 0;
 }
 
 .content h1 {
