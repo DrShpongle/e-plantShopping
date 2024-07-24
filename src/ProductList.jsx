@@ -363,7 +363,7 @@ function ProductList() {
         <div className="product-grid">
           {plantsArray.map((product) => {
             return (
-              <div key={product.category}>
+              <div key={product.category} className="product-grid-item">
                 <h2 className="product-list-title">{product.category}</h2>
                 <ul className="product-list">
                   {product.plants.map((plant, index) => {

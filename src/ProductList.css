@@ -48,6 +48,14 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.product-grid-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
@@ -66,6 +74,7 @@ body {
   border-color: #b8b8b8;
   margin: 40px 0 30px 0;
   padding: 5px 30px;
+  text-align: center;
 }
 
 /* Product Card */
