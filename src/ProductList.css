@@ -180,6 +180,10 @@ body {
   margin-left: 27px;
   position: absolute;
   font-size: 29px;
+  /* inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 .plantname_heading {
   display: flex;

@@ -5,9 +5,8 @@ import CartItem from "./CartItem";
 import { addItem } from "./CartSlice";
 
 function ProductList() {
+  const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart);
-  console.log("cartItems:", cartItems);
   const [showCart, setShowCart] = useState(false);
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   const [addedToCart, setAddedToCart] = useState({});
@@ -273,6 +272,7 @@ function ProductList() {
     color: "white",
     fontSize: "30px",
     textDecoration: "none",
+    position: "relative",
   };
   const handleCartClick = (e) => {
     e.preventDefault();
@@ -295,6 +295,14 @@ function ProductList() {
       ...prevState,
       [product.name]: true,
     }));
+  };
+
+  const calculateTotalItems = (items) => {
+    let totalItems = 0;
+    items.forEach((item) => {
+      totalItems += item.quantity;
+    });
+    return totalItems;
   };
   return (
     <div>
@@ -321,7 +329,9 @@ function ProductList() {
             </a>
           </div>
           <div>
-            {" "}
+            <span className="cart_quantity_count">
+              {calculateTotalItems(cart)}
+            </span>
             <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}>
               <h1 className="cart">
                 <svg
@@ -338,9 +348,9 @@ function ProductList() {
                     d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8"
                     fill="none"
                     stroke="#faf9f9"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     id="mainIconPathAttribute"
                   ></path>
                 </svg>

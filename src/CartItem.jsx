@@ -8,23 +8,49 @@ const CartItem = ({ onContinueShopping }) => {
   const dispatch = useDispatch();
 
   // Calculate total amount for all products in the cart
-  const calculateTotalAmount = () => {};
+  const calculateTotalAmount = (items) => {
+    let totalPrice = 0;
+    items.forEach((item) => {
+      totalPrice += parseFloat(item.cost.replace("$", "")) * item.quantity;
+    });
+    return totalPrice;
+  };
 
-  const handleContinueShopping = (e) => {};
+  const handleContinueShopping = (e) => {
+    onContinueShopping(e);
+  };
 
-  const handleIncrement = (item) => {};
+  const handleCheckoutShopping = (e) => {
+    e.preventDefault();
+    alert("Functionality to be added for future reference");
+  };
 
-  const handleDecrement = (item) => {};
+  const handleIncrement = (item) => {
+    dispatch(updateQuantity({ ...item, quantity: item.quantity + 1 }));
+  };
 
-  const handleRemove = (item) => {};
+  const handleDecrement = (item) => {
+    if (item.quantity > 1) {
+      dispatch(updateQuantity({ ...item, quantity: item.quantity - 1 }));
+    } else if (item.quantity === 1) {
+      dispatch(removeItem(item.name));
+    }
+  };
+
+  const handleRemove = (item) => {
+    dispatch(removeItem(item.name));
+  };
 
   // Calculate total cost based on quantity for an item
-  const calculateTotalCost = (item) => {};
+  const calculateTotalCost = (item) => {
+    const { cost, quantity } = item;
+    return parseFloat(cost.replace("$", "")) * quantity;
+  };
 
   return (
     <div className="cart-container">
       <h2 style={{ color: "black" }}>
-        Total Cart Amount: ${calculateTotalAmount()}
+        Total Cart Amount: ${calculateTotalAmount(cart)}
       </h2>
       <div>
         {cart.map((item) => (
@@ -75,7 +101,12 @@ const CartItem = ({ onContinueShopping }) => {
           Continue Shopping
         </button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button
+          className="get-started-button1"
+          onClick={(e) => handleCheckoutShopping(e)}
+        >
+          Checkout
+        </button>
       </div>
     </div>
   );
